@@ -34,7 +34,7 @@ user@~$ cd my_project_folder
 user@my_project_folder$ virtualenv -p $(which python3) venv
 user@my_project_folder$ git clone https://github.com/AshishKumar-AK/JIRA-DSR.git
 user@my_project_folder$ source venv/bin/activate
-user@my_project_folder(venv)$ pip3 install -r requirements.txt
+user@my_project_folder(venv)$ pip3 install -r JIRA-DSR/requirements.txt
 ```
 
 Check if now script can be run successfully
