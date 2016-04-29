@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name='jira-project'>
+      <xs:complexType>
+          <xs:sequence>
+              <xs:element name="source" type="SourceType" minOccurs='1' maxOccurs='1'/>
+          </xs:sequence>
+          <xs:attribute name='key' type='NonEmptyString' use="required"/>
+          <xs:attribute name='manager' type='NonEmptyString' use="required"/>
+          <xs:attribute name='enabled' type='NonEmptyString' use="required"/>
+          <xs:attribute name='url' type='NonEmptyURL' use="required"/>
+          <xs:attribute name='user' type='NonEmptyString' use="required"/>
+          <xs:attribute name='password' type='NonEmptyString' use="required"/>
+          <xs:attribute name='timezone' type='NonEmptyString' use="required"/>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:complexType name="SourceType">
+       <xs:attribute name='type' type='NonEmptyString' use="required"/>
+       <xs:attribute name='url' type='NonEmptyURL' use="required"/>
+       <xs:attribute name='user' type='NonEmptyString' use="required"/>
+       <xs:attribute name='password' type='NonEmptyString' use="required"/>
+       <xs:attribute name='repo' type='NonEmptyString' use="required"/>
+   </xs:complexType>
+
+   <xs:simpleType name="NonEmptyString">
+     <xs:restriction base="xs:string">
+       <xs:minLength value="1" />
+         <xs:pattern value="\S+"/>
+     </xs:restriction>
+   </xs:simpleType>
+
+   <xs:simpleType name="SourceTypeValue">
+     <xs:restriction base="xs:string">
+         <xs:enumeration value="fisheye" />
+         <xs:enumeration value="stash" />
+     </xs:restriction>
+   </xs:simpleType>
+
+   <xs:simpleType name="NonEmptyURL">
+     <xs:restriction base="xs:string">
+       <xs:minLength value="1" />
+         <xs:pattern value="[hH][tT]{2}[pP][sS]{0,1}://.*"/>
+     </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

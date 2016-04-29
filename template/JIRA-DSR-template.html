@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ project }} DSR report</title>
+</head>
+
+<body style="font-size:12px; font-family:Arial;">
+    <div class="content" style="width:1064px;padding:0 15px;">
+        <div class="headerpanel" style="margin-bottom:20px; margin-top:10px; float:left; width:100%; font-weight:bold;">
+        <div class="compname" style="font-size:16px; font-weight:bold; padding-left:0; margin-bottom:15px;">YOUR COMPANY NAME HERE</div>
+			 <table border="0" cellpadding="0" cellspacing="0" width="100%" id="emailHeader">
+                 <tr>
+                    <td valign="top">Project:&nbsp;&nbsp;<label>{{ project }}</label></td>
+					<td valign="top">Employee:&nbsp;&nbsp;<label>{{ user }}</label></td>
+					<td valign="top">Date:&nbsp;&nbsp;<label>{{ publish_date }}</label></td>
+					<td valign="top">Published at:&nbsp;&nbsp;<label>{{ publish_time }}</label></td>
+                     <td valign="top">Report Range:&nbsp;&nbsp;<label>{{ start_date }} - {{ end_date }} {{ timezone }}</label></td>
+                 </tr>
+            </table>
+        </div>
+    <div style="padding:10px 0px; clear:both;"></div>
+    <table class="reportTable" style="table-layout:fixed;border:1px solid #a8a8a8;; width:100%; border-collapse: collapse;" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr role="row">
+                <th style="font-size:11px; font-weight:700; background:#d8d8d8; color:#555; padding:8px 10px; border:1px solid #a8a8a8;">JIRA-ID</th>
+                <th style="font-size:11px; font-weight:700; background:#d8d8d8; color:#555; padding:8px 10px; border:1px solid #a8a8a8;">TITLE</th>
+                <th style="font-size:11px; font-weight:700; background:#d8d8d8; color:#555; padding:8px 10px; border:1px solid #a8a8a8;">PRIORITY</th>
+                <th style="font-size:11px; font-weight:700; background:#d8d8d8; color:#555; padding:8px 10px; border:1px solid #a8a8a8;">ASSIGNEE</th>
+                <th style="font-size:11px; font-weight:700; background:#d8d8d8; color:#555; padding:8px 10px; border:1px solid #a8a8a8;">STATUS</th>
+                <th style="font-size:11px; font-weight:700; background:#d8d8d8; color:#555; padding:8px 10px; border:1px solid #a8a8a8;">TRANSITIONS</th>
+                <th style="font-size:11px; font-weight:700; background:#d8d8d8; color:#555; padding:8px 10px; border:1px solid #a8a8a8;">ESTIMATED TIME</th>
+                <th style="font-size:11px; font-weight:700; background:#d8d8d8; color:#555; padding:8px 10px; border:1px solid #a8a8a8;">TOTAL TIME SPENT</th>
+                <th style="font-size:11px; font-weight:700; background:#d8d8d8; color:#555; padding:8px 10px; border:1px solid #a8a8a8;">WORK USER</th>
+                <th style="font-size:11px; font-weight:700; background:#d8d8d8; color:#555; padding:8px 10px; border:1px solid #a8a8a8;">WORK TIME</th>
+                <th style="font-size:11px; font-weight:700; background:#d8d8d8; color:#555; padding:8px 10px; border:1px solid #a8a8a8;">WORK LOG</th>
+                <th style="font-size:11px; font-weight:700; background:#d8d8d8; color:#555; padding:8px 10px; border:1px solid #a8a8a8;">COMMENTS</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for userlog in userlogs %}
+            <tr>
+                <td style="width:100px; word-wrap: break-word; padding:5px;border:1px solid #a8a8a8;">
+                    {% set issue_url = [userlog.parent.parent.config.url, "/browse/", userlog.parent] %}
+                    <a target="_blank" href={{ issue_url|join }}>{{ userlog.parent }}</a>
+                </td>
+                <td style="width:100px; word-wrap: break-word; padding:5px;border:1px solid #a8a8a8;">{{ userlog.parent.get_title() }}</td>
+                <td style="width:100px; word-wrap: break-word; padding:5px;border:1px solid #a8a8a8;">{{ userlog.parent.get_priority() }}</td>
+                <td style="width:100px; word-wrap: break-word; padding:5px;border:1px solid #a8a8a8;">{{ userlog.parent.get_assignee() }}</td>
+                <td style="width:100px; word-wrap: break-word; padding:5px;border:1px solid #a8a8a8;">{{ userlog.parent.get_status() }}</td>
+                <td style="width:100px; word-wrap: break-word; padding:5px;border:1px solid #a8a8a8;">
+                    <ul style="padding:0;">
+                    {% for transition in userlog.get_user_issue_state_transitions() %}
+                        <li>{{ transition }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+                <td style="width:100px; word-wrap: break-word; padding:5px;border:1px solid #a8a8a8;">{{ userlog.parent.get_estimated_time() }}</td>
+                <td style="width:100px; word-wrap: break-word; padding:5px;border:1px solid #a8a8a8;">{{ userlog.parent.get_total_spent_time() }}</td>
+                <td style="width:100px; word-wrap: break-word; padding:5px;border:1px solid #a8a8a8;">{{ user }}</td>
+                <td style="width:100px; word-wrap: break-word; padding:5px;border:1px solid #a8a8a8;">{{ userlog.get_work_log_time() }}</td>
+                <td style="width:100px; word-wrap: break-word; padding:5px;border:1px solid #a8a8a8;">
+                    <ul style="padding:0;">
+                    {% for log in userlog.work_log_comments %}
+                        {% if log %}
+                        <li>{{ log }}</li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                </td>
+                <td style="width:100px; word-wrap: break-word; padding:5px;border:1px solid #a8a8a8;">
+                    <ul style="padding:0;">
+                    {% for comment in userlog.get_user_issue_comments() %}
+                        <li>{{ comment }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+   <div style="padding:10px 0px;"></div>
+    </div>
+</body>
+
+</html>

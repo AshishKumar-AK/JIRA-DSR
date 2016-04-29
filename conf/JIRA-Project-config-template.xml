@@ -1,0 +1,85 @@
+<!--
+This is a sample JIRA project XML config file which can be used as base.
+The XML tag and structure of this config file is fixed and always validated
+by JIRA_DSR.py script using schema.xsd file.
+
+There should be one XML config file created for per JIRA Project for which we want
+to have daily status reports and placed under same "conf/" directory.
+
+This config file contains all the details of a JIRA project which is required to
+generate the daily status report.
+
+"jira-project" is the parent element which represents a JIRA project and contains
+following attributes which are required to be present in XML config:
+
+    enabled: allowed values are true and false (case insensitive) which tells DSR
+             script whether it should process this project config xml and generate
+             DSR report. Using this value you can also turn on and off DSR reporting
+             for any JIRA project without removing the config XML file itself.
+
+    key: This the value of unique JIRA Project key from JIRA server which is used
+         by script to identify and fetch details for correct JIRA project.
+
+    manager: This is the email address of person who should act like manager and receive
+             DSR reports for all members working on that project. If there are multiple
+             managers who would like to receive the DSR report for any project then you
+             can put a comma separated list of email addresses.
+             e.g. (manager@example.com) or (manager-a@example.com,manager-b@example.com)
+
+    url: This is the url of JIRA server application where this JIRA project is present.
+         The url can be http or https both. e.g. (https://your-jira-server.com:port/jira/)
+
+    user: This is the name of user which will be used by script to login and use against
+          JIRA REST API. The user should be valid user present in that project's JIRA server
+          and should also have all the read privileges in JIRA server to look through all
+          the issues. The recommendation is to have JIRA user which have administrator privilege
+          on that JIRA project.
+
+    password: Password of above JIRA user login.
+
+    timezone: This value represents the timezone of JIRA project for reporting purpose.
+              If your project members are working in certain tmezone i.e. (UTC or US EST)
+              and you want your DSR report time range should match according to work timezone
+              then you should put the related timezone value here. the default value is UTC.
+              You can put timezone values available in python pytz module. Check following:
+              import pytz; print(pytz.all_timezones) to get all available timezone strings.
+              OR check tz timezone lists from here:
+                https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+
+"jira-project" tag is also having a child element tag "source" which tells DSR script about
+the source code review system being used by JIRA project to tracking codebase associated
+project. The details of this tag is being used by DSR script to get the list of all code commits ID links
+which are made by any project member on any JIRA issue within report time range on that JIRA project.
+
+Following are the details of attributes which are required to be present in project xml config:
+
+    type: This value tells the type of source code review system associated with JIRA project.
+           This value is then used to DSR script to decide which code modules to use
+           to fetch commit ID information made against to those JIRA issues.
+           Right now, only two values are allowed: fisheye or stash (case insensitive)
+           But in future, we might extend it to integrate with other source code
+           review system as well
+
+    url: HTTP or HTTPS URL of source code review system.
+         e.g. (https://your-source-review-system:port/)
+
+    user: user login name of source code review system user.
+    password: password of above user login
+    repo: The name of Repository project where JIRA project's associated codebase is present.
+
+-->
+
+<jira-project enabled="true"
+              key="JIRA-PROJECT-KEY-HERE"
+              manager="JIRA-PROJECT-MANAGER-EMAIL-HERE"
+              url="JIRA-SERVER-URL-HERE"
+              user="JIRA-USER-HERE"
+              password="JIRA-PASSWORD-HERE"
+              timezone="JIRA-PROJECT-REPORTING-TIMEZONE-HERE">
+    <source type="SOURCE CODE REVIEW SYSTEM TYPE (fisheye/stash) HERE"
+            url="SOURCE CODE REVIEW SYSTEM URL HERE"
+            user="SOURCE CODE REVIEW SYSTEM USER HERE"
+            password="USER PASSWORD HERE"
+            repo="SOURCE CODE REVIEW SYSTEM REPOSITORY NAME"/>
+</jira-project>
