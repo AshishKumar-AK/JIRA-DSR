@@ -39,7 +39,7 @@ user@my_project_folder(venv)$ pip3 install -r JIRA-DSR/requirements.txt
 
 Check if now script can be run successfully
 
-```user@my_project_folder(venv)$ python3 JIRA_DSR.py --help```
+```user@JIRA-DSR(venv)$ python3 JIRA_DSR.py --help```
 
 ## Script Setup
 
@@ -65,14 +65,14 @@ Per JIRA Project XML configuration file which contains details about JIRA server
 2. Once you have a JIRA project's config xml created, you can also validate the config xml file to check whether it has correct XML schema structure against and also has correct values which can be successfully used by script to generate DSR report by following script arguments:
 
 
- ```user@my_project_folder(venv)$ python3 JIRA_DSR.py --config="ONLY NAME OF THE JIRA PROJECT CONFIG UNDER CONF DIRECTORY" --validate --interactive```
+ ```user@JIRA-DSR(venv)$ python3 JIRA_DSR.py --config="ONLY NAME OF THE JIRA PROJECT CONFIG UNDER CONF DIRECTORY" --validate --interactive```
  
  
  If there are any issues with project's config xml file, it will print for errors on screen.
 3. Now to generate the DSR report only for this project, run following:
 
 
- ```user@my_project_folder(venv)$ python3 JIRA_DSR.py --config="ONLY NAME OF THE JIRA PROJECT CONFIG UNDER CONF DIRECTORY"```
+ ```user@JIRA-DSR(venv)$ python3 JIRA_DSR.py --config="ONLY NAME OF THE JIRA PROJECT CONFIG UNDER CONF DIRECTORY"```
 
 
  And this will generate DSR report with date range of yesterday's date and email them to project members and project managers email addresses.
@@ -83,7 +83,7 @@ Per JIRA Project XML configuration file which contains details about JIRA server
 
 Although script available options and arguments are pretty much self explanatory itself when run with <em>-h/--help</em> option:
 ```
-user@my_project_folder(venv)$ python3 JIRA_DSR.py --help
+user@JIRA-DSR(venv)$ python3 JIRA_DSR.py --help
 usage: JIRA_DSR.py [-h] [--attach] [--base_path BASE_PATH] [--config CONFIG]
                    [--email_method {SMTP,GMAIL_API}]
                    [--gmail_config GMAIL_CONFIG] [--interactive]
