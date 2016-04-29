@@ -166,15 +166,15 @@ optional arguments:
 
 - Run this script from a scheduled task or cron job each night or once in a day to get daily status report about work or activities being done yesterday on all configured JIRA projects:
  
- ```python3 JIRA_DSR_report.py --email_method="GMAIL_API" --summary="adminORreporter@example.com"```
+ ```python3 JIRA_DSR.py --email_method="GMAIL_API" --summary="adminORreporter@example.com"```
 
 - To manually generate report for any specific project for specific datetime range:
  
- ```python3 JIRA_DSR_report.py --email_method="GMAIL_API" --config="JIRA_PROJECT.xml" --start_date="2016-04-11 00:00" --end_date="2016-04-12 00:00"```
+ ```python3 JIRA_DSR.py --email_method="GMAIL_API" --config="JIRA_PROJECT.xml" --start_date="2016-04-11 00:00" --end_date="2016-04-12 00:00"```
  
 - To generate DSR report for a JIRA project in CSV format and send this report as attachment as well in email:
 
- ```python3 JIRA_DSR_report.py --email_method="GMAIL_API" --config="JIRA_PROJECT.xml" --report="CSV" --attach```
+ ```python3 JIRA_DSR.py --email_method="GMAIL_API" --config="JIRA_PROJECT.xml" --report="CSV" --attach```
 
 ## TODOs:
 
