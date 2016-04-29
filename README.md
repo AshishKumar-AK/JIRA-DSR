@@ -24,15 +24,15 @@ The reason I open sourced this home grown solution, thinking may be someone out 
 
 Download this script into a directory from where it should be run by simply copying it.
 
-```user@~$ git clone https://github.com/AshishKumar-AK/JIRA-DSR-REPORT.git```
+```user@~$ git clone https://github.com/AshishKumar-AK/JIRA-DSR.git```
 
 OR by running in a separate virtualenv
 
 ```
 user@~$ pip3 install virtualenv
 user@~$ cd my_project_folder
-user@my_project_folder$ virtualenv venv
-user@my_project_folder$ git clone https://github.com/AshishKumar-AK/JIRA-DSR-REPORT.git
+user@my_project_folder$ virtualenv -p $(which python3) venv
+user@my_project_folder$ git clone https://github.com/AshishKumar-AK/JIRA-DSR.git
 user@my_project_folder$ source venv/bin/activate
 user@my_project_folder(venv)$ pip3 install -r requirements.txt
 ```
