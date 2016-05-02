@@ -1,11 +1,11 @@
 ## Synopsis
 
-Python3 script to generate daily status reports for JIRA projects using JIRA REST API.
+Python3 script to generate date time range based status or worklog activity reports for all issues in JIRA projects using JIRA REST API.
 
 ## Motivation
 
 All our software projects are using Atlassian JIRA platform for their project management and development tracking efforts.
-Project Managers of those projects needed a simple solution where they can get daily status report about any work or activities being done by team members on their respective JIRA projects.
+Project Managers of those projects needed a simple solution where they can get daily/weekly/monthly or any date time range based status reports about any work or activities being done by team members on their respective JIRA projects.
 
 The information they required in these daily status report of JIRA projects were followings:
 - Each team member, working on a JIRA project should receive their daily status report over email which will contain details about any worklogs or activities (issue commit/resolve/fixed/comment) being performed by them on JIRA issues of that project.
