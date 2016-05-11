@@ -660,7 +660,7 @@ def publish_dsr_report(project, manager, project_user_worklogs, args):
         with open(report, "r") as f:
             message = f.read()
         attachment = report if args.attach else None
-        user_email = 'ashish.kumar@forgeahead.io'
+        user_email = userlogs[0].email
         subject = "{0} DSR Report {1} | {2}".format(project, publish_date, user)
         logger.info("Sending DSR Report for user [{0}] for JIRA Project [{1}] "
                     "to email address: [{2}]".format(user, project.name, user_email))
