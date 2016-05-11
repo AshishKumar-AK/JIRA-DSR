@@ -213,8 +213,8 @@ class JIRAProject:
     """
     Custom class which represents a JIRA project for DSR report
     """
-    JQL = 'project={project} AND (created >= "{start}" and created <= "{end}") ' \
-          'OR (updated >= "{start}" and updated <= "{end}") order by updated asc'
+    JQL = 'project={project} AND ((created >= "{start}" and created <= "{end}") ' \
+          'OR (updated >= "{start}" and updated <= "{end}")) order by updated asc'
 
     def __init__(self, config, start_date, end_date):
         self.config = config
