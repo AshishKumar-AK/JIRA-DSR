@@ -280,7 +280,8 @@ class JIRAIssue:
         return self.issue.fields.priority.name
 
     def get_assignee(self):
-        return self.issue.fields.assignee.displayName
+        return self.issue.fields.assignee.displayName \
+            if self.issue.fields.assignee is not None else ""
 
     def get_status(self):
         return self.issue.fields.status.name
