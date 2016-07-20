@@ -213,7 +213,7 @@ class JIRAProject:
     """
     Custom class which represents a JIRA project for DSR report
     """
-    JQL = 'project={project} AND ((created >= "{start}" and created <= "{end}") ' \
+    JQL = 'project="{project}" AND ((created >= "{start}" and created <= "{end}") ' \
           'OR (updated >= "{start}" and updated <= "{end}")) order by updated asc'
 
     def __init__(self, config, start_date, end_date):
@@ -287,7 +287,7 @@ class JIRAIssue:
         return self.issue.fields.status.name
 
     def get_estimated_time(self):
-        return DSRUtil.get_seconds_in_hour_and_minutes(self.issue.fields.timeestimate)
+        return DSRUtil.get_seconds_in_hour_and_minutes(self.issue.fields.timeoriginalestimate)
 
     def get_total_spent_time(self):
         return DSRUtil.get_seconds_in_hour_and_minutes(self.issue.fields.timespent)
